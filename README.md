@@ -1,5 +1,7 @@
 # Backbone.js + Marionette, RequireJS, Jasmine, PhantomJS, and Grunt
 
+с поддержкой i18n
+
 ## Запуск проекта
 
 Порядок установки и запуска:
