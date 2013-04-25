@@ -1,7 +1,12 @@
 # Backbone.js + Marionette, RequireJS, Jasmine, PhantomJS, and Grunt
 
-( after reading [blog post](http://hdnrnzk.me/2013/01/10/backbone-requirejs-jasmine-phantomjs-and-grunt/).
+## Запуск проекта
 
+Порядок установки и запуска:
+1. Установите node.js
+2. git clone https://github.com/designeng/marionette-base.git
+3. cd marionette-base && npm install - автоматическая установка зависимостей (описывается в package.json в полях "dependencies" и "devDependencies").
+4. grunt   - эта команда запустит дефолтную задачу, описанную в Gruntfile.js, сейчас это grunt.registerTask('default', ['livereload-start', 'connect', 'regarde'])
 
 
 ## Работа с локалью
