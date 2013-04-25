@@ -9,6 +9,14 @@ var folderMount = function folderMount(connect, point) {
 module.exports = function(grunt) {
   grunt.initConfig({
 
+    requirejs: {
+      compile: {
+        options: {
+          mainConfigFile: "app/build/build.js"
+        }
+      }
+    },
+
 
     //--------------
     livereload: {
@@ -58,9 +66,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-livereload');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
+  grunt.registerTask('r', ['requirejs']);
 
 }
