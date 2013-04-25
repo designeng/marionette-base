@@ -1,1 +1,0 @@
-define(["backbone"],function(e){var t=e.Collection.extend({url:"/test"});return t});
