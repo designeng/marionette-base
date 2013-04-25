@@ -43,14 +43,13 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Configuration to be run (and then tested) - not works yet
+
     exec: {
       jasmine: {
-        command: 'phantomjs test/lib/run-jasmine.js http://localhost:9123/test',
+        command: 'phantomjs test/lib/run-jasmine.js http://localhost:8877/test',
         stdout: true
       }
     },
-    //--------------------------------------
 
     less: {
       all: {
@@ -65,7 +64,7 @@ module.exports = function(grunt) {
     regarde: {    
       js: {
         files: ['test/spec/**/*.js', 'app/js/**/*.js', 'test/SpecRunner.js', '!node_modules/**/*.js', '!app/components/**/*.js'],
-        tasks: ['livereload']
+        tasks: ['livereload' /* , 'exec:jasmine' */]    //uncomment for view tests in terminal
       },
       css: {
         files: ['app/styles/less/app.less', 'app/styles/less/**/**.less'],
@@ -97,7 +96,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
   grunt.registerTask('test', ['jasmine']);
-  grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
+  //grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
+
+  grunt.registerTask('e', ['exec:createfile']);
 
   /* build tasks */
   //grunt.registerTask('less', ['less']);
