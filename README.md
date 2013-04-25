@@ -23,7 +23,7 @@
 
 В папке nls находится general.js с дефолтными значениями (на английском языке). Значения для конкретной локали в директориях, соответствующих языкам (ru, fr etc).
 
-Локаль должна быть явным образом активизирована в general.js(например, "ru": true)
+Локаль должна быть явным образом активизирована в general.js (например, "ru": true)
 
 Поскольку в проекте используется rejuireJS, для отображения на странице конкретных полей из general.js в зависимостях и аргументах определяющей модуль функции
 нужно прописать местоположение general.js в качестве аргумента для плагина i18n (т.е. после восклицательного знака), например:
@@ -33,4 +33,44 @@ require(['app', 'i18n!nls/general'], function(App, generalText) {
 	//какой-то код
 	console.log(generalText.body)
 }
+```
+
+## Настройки RejuireJS
+
+За подробной информацией по RejuireJS следует обратиться к [документации](http://requirejs.org/docs/api.html)
+
+Примерная конфигурация
+
+```js
+require.config({
+    baseURL: 'app/js',
+
+    paths: {
+        jquery: 'lib/jquery.min',  // amd version
+        underscore: 'lib/underscore', // amd version
+        backbone: 'lib/backbone', // amd version        
+        'backbone.eventbinder': 'lib/backbone.eventbinder', // amd version
+        'backbone.babysitter': 'lib/backbone.babysitter', // amd version
+        marionette: 'lib/backbone.marionette',  // amd version
+        'backbone.wreqr': 'lib/backbone.wreqr', // amd version
+        text: 'lib/requirejs-text/text',
+        i18n: 'lib/i18n'
+    },
+
+    // load the 'non AMD' versions of backbone, underscore and Marionette
+    shim: {        
+        'backbone': {
+            //These script dependencies should be loaded before loading
+            //backbone.js
+            deps: ['underscore', 'jquery'],
+            //Once loaded, use the global 'Backbone' as the
+            //module value.
+            exports: 'Backbone'
+        },
+        marionette: ['backbone']
+    },
+    locale: function(){
+        return "ru";
+    }()
+});
 ```
