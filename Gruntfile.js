@@ -43,44 +43,64 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Configuration to be run (and then tested)
+    // Configuration to be run (and then tested) - not works yet
     exec: {
       jasmine: {
         command: 'phantomjs test/lib/run-jasmine.js http://localhost:9123/test',
         stdout: true
       }
     },
+    //--------------------------------------
+
+    less: {
+      all: {
+        src: 'app/styles/less/app.less',
+        dest: 'app/styles/css/app.css',
+        options: {
+          compress: true
+        }
+      }
+    },
 
     regarde: {    
       js: {
         files: ['test/spec/**/*.js', 'app/js/**/*.js', 'test/SpecRunner.js', '!node_modules/**/*.js', '!app/components/**/*.js'],
-        tasks: ['livereload', 'exec']
+        tasks: ['livereload']
+      },
+      css: {
+        files: ['app/styles/less/app.less', 'app/styles/less/**/**.less'],
+        tasks: ['less', 'livereload']
       }
     }
 
+    
     
 
   });
 
 /*
-  grunt.loadNpmTasks('grunt-exec');
-
   grunt.registerTask('default', 'server exec watch');
   grunt.registerTask('s', 'server watch');
   */
 
-  grunt.loadNpmTasks('grunt-contrib-jasmine');  
-
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-livereload');
   grunt.loadNpmTasks('grunt-exec');
+
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
 
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
+
+  /* build tasks */
+  //grunt.registerTask('less', ['less']);
   grunt.registerTask('rcompile', ['requirejs']);
 
 }
