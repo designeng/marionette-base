@@ -74,3 +74,42 @@ require.config({
     }()
 });
 ```
+
+## Оптимизация js-файлов и сборка проекта с использование r.js
+
+Что касается сборки проекта с использованием r.js, на этот счет в Gruntfile есть специальная команда `rcompile` (usage: $ grunt rcompile - она запускает задание
+`requirejs`. Информация о настройках оптимизатора r.js находится, в частности, [здесь](http://requirejs.org/docs/faq-advanced.html). Пример настройки:
+
+```js
+requirejs: {
+      compile: {
+        options: {
+          appDir: "app",
+          baseUrl: "js",
+          dir: "public",
+          mainConfigFile: "app/js/main.js",
+          modules: [
+              {
+                  name: "main.build",
+                  include: ["main"],
+                  create: true
+              }
+          ]
+        }
+      }
+    }
+```
+
+Результатом сборки будет js-файл, который будет называться в соответствии с options.modules.name для requirejs в Gruntfile (т.е. main.build.js).
+Все, что требуется, это указать "точку входа" в index.html:
+
+```js
+<script type="text/javascript" data-main="js/main.build" src="js/lib/require.js"></script>
+```
+
+## Сборка css
+
+....................
+
+
+

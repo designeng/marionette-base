@@ -12,7 +12,17 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          mainConfigFile: "app/build/build.js"
+          appDir: "app",
+          baseUrl: "js",
+          dir: "public",
+          mainConfigFile: "app/js/main.js",
+          modules: [
+              {
+                  name: "main.build",
+                  include: ["main"],
+                  create: true
+              }
+          ]
         }
       }
     },
@@ -71,6 +81,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
-  grunt.registerTask('r', ['requirejs']);
+  grunt.registerTask('rcompile', ['requirejs']);
 
 }

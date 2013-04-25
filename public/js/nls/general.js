@@ -1,0 +1,1 @@
+define({root:{header:"RequireJS i18n - Testing",body:"This is an example of translated text"},fr:!0,ru:!0});
