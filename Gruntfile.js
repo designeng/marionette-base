@@ -32,6 +32,7 @@ module.exports = function(grunt) {
     livereload: {
       port: 35730 // Default livereload listening port.
     },
+
     connect: {
       livereload: {
         options: {
@@ -70,6 +71,25 @@ module.exports = function(grunt) {
         files: ['app/styles/less/app.less', 'app/styles/less/**/**.less'],
         tasks: ['less', 'livereload']
       }
+    },
+
+    handlebars:{
+      compile:{
+        options:{
+          wrapped:true,
+          namespace:"agent.Templates.FORM.TEMPLATES",
+          processName:function (filename) {
+            var name = filename.split('/');
+            name = name[name.length - 1];
+            name = name.substr(0, name.length - 5);
+            return name;
+          }
+        },
+        //changes need
+        files:{
+          "app/js_compile/compilate_tpl_forms.js":["app/templates/tpl_forms/*.html"]
+        }
+      }
     }    
 
   };
@@ -78,31 +98,27 @@ module.exports = function(grunt) {
 
   grunt.initConfig(configOptions);
 
-/*
-  grunt.registerTask('default', 'server exec watch');
-  grunt.registerTask('s', 'server watch');
-  */
-
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-
+  //----------------- TOOLS ---------------------------//
+  //watch, connect, livereload  tools
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-livereload');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  //testing tools
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
+  //build tools
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 
+  //----------------- TASKS ---------------------------//
+  //grunt.registerTask('less', ['less']);
+
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
   grunt.registerTask('test', ['jasmine']);
-  //grunt.registerTask('e', ['livereload-start', 'connect', 'exec']);
-
-  grunt.registerTask('e', ['exec:createfile']);
-
-  /* build tasks */
-  //grunt.registerTask('less', ['less']);
   grunt.registerTask('rcompile', ['requirejs']);
 
+  grunt.registerTask('production', 'handlebars concat:production  min:production');
 }
