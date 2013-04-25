@@ -3,6 +3,7 @@
 ## Запуск проекта
 
 Порядок установки и запуска:
+
 1. Установите node.js
 2. git clone https://github.com/designeng/marionette-base.git
 3. cd marionette-base && npm install - автоматическая установка зависимостей (описывается в package.json в полях "dependencies" и "devDependencies").
