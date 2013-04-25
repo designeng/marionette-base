@@ -123,9 +123,15 @@ requirejs: {
 
 Результаты тестов можно просматривать в браузере по адресу http://localhost:8877/test/
 
-Для того, чтобы результаты тестов выводились в терминале, добавьте в настройки задач для js `exec:jasmine`:
+Для того, чтобы результаты тестов выводились в терминале, поставьте значение пременной `showTestsInTerminal` true
+(это добавит в настройки задач для regarde.js `exec:jasmine`) :
 
 ```js
+var showTestsInTerminal = true;
+
+// . . . . . . . . . . . 
+//идентично
+
 regarde: {    
       js: {
         files: ['test/spec/**/*.js', 'app/js/**/*.js', 'test/SpecRunner.js', '!node_modules/**/*.js', '!app/components/**/*.js'],

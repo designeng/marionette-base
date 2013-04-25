@@ -6,8 +6,10 @@ var folderMount = function folderMount(connect, point) {
   return connect.static(path.resolve(point));
 };
 
+var showTestsInTerminal = false;
+
 module.exports = function(grunt) {
-  grunt.initConfig({
+  var configOptions = {
 
     requirejs: {
       compile: {
@@ -27,8 +29,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-    //--------------
     livereload: {
       port: 35730 // Default livereload listening port.
     },
@@ -64,18 +64,19 @@ module.exports = function(grunt) {
     regarde: {    
       js: {
         files: ['test/spec/**/*.js', 'app/js/**/*.js', 'test/SpecRunner.js', '!node_modules/**/*.js', '!app/components/**/*.js'],
-        tasks: ['livereload' /* , 'exec:jasmine' */]    //uncomment for view tests in terminal
+        tasks: ['livereload']
       },
       css: {
         files: ['app/styles/less/app.less', 'app/styles/less/**/**.less'],
         tasks: ['less', 'livereload']
       }
-    }
+    }    
 
-    
-    
+  };
 
-  });
+  if(showTestsInTerminal) configOptions.regarde.js.tasks.push('exec:jasmine');
+
+  grunt.initConfig(configOptions);
 
 /*
   grunt.registerTask('default', 'server exec watch');
