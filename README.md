@@ -146,5 +146,18 @@ regarde: {
     }
 ```
 
+<!-- TO DO: tests coverage -->
+
+## Проверка кода с помощью JSHint и генерация отчетов с помощью Grunt Plato
+
+Для статического анализа кода используется JSHint. Настройки для JSHint описаны в файле `.jshintrc`.
+
+Документация по JSHint находится [здесь](http://www.jshint.com/docs/). Также доступен русский [перевод настроек](http://lugnsk.org/lugnskru/2012/04/jshint-povyishaem-kachestvo-javascript-koda.html) `.jshintrc`.
+
+Результаты проверки можно увидеть по адресу http://localhost:8877/reports/.
+
+
+В отчетах также отражается информация по Cyclomatic complexity для составляющих проекта.
+
 
 

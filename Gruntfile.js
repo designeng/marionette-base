@@ -29,8 +29,38 @@ module.exports = function(grunt) {
       }
     },
 
+    jasmine : {
+      //src : 'app/**/*.js',
+      src: 'app/js/collections/todocollection.js',
+      options : {
+        specs : 'test/**/*.js',
+        template : require('grunt-template-jasmine-istanbul'),
+        templateOptions: {
+          coverage: 'reports/coverage.json',
+          report: 'reports/coverage'
+        }
+      }
+    },
+
+    plato: {
+      your_task: {
+        options : {
+          jshint : grunt.file.readJSON('.jshintrc'),
+          complexity : {
+            logicalor : false,
+            switchcase : false,
+            forin : true,
+            trycatch : true
+          }
+        },
+        files: {
+          'reports': ['app/**/*.js'],
+        },
+      }
+    },
+
     livereload: {
-      port: 35730 // Default livereload listening port.
+      port: 35730 // Default livereload listening port. (35729 ?)
     },
 
     connect: {
@@ -98,7 +128,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig(configOptions);
 
-  //----------------- TOOLS ---------------------------//
+  //----------------- LOAD TOOLS ---------------------------//
   //watch, connect, livereload  tools
   grunt.loadNpmTasks('grunt-regarde');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -107,18 +137,24 @@ module.exports = function(grunt) {
 
   //testing tools
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  //tests coverage
+  grunt.loadNpmTasks('grunt-plato');
 
   //build tools
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 
-  //----------------- TASKS ---------------------------//
+  //----------------- REGISTER TASKS ---------------------------//
   //grunt.registerTask('less', ['less']);
 
   grunt.registerTask('default', ['livereload-start', 'connect', 'regarde']);
-  grunt.registerTask('test', ['jasmine']);
+
+  grunt.registerTask('t', ['jasmine']);
+
   grunt.registerTask('rcompile', ['requirejs']);
+
+  grunt.registerTask('p', ['plato']);
 
   grunt.registerTask('production', 'handlebars concat:production  min:production');
 }

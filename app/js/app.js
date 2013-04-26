@@ -2,6 +2,10 @@ define(['backbone', 'underscore', 'marionette', 'vent'], function(Backbone, _, M
     'use strict';
 
     var app = new Marionette.Application();
+
+    app.test = function(){
+        return "123";
+    }
     
 
     // these regions correspond to #ID's in the index.html 
