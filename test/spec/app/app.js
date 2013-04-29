@@ -1,16 +1,22 @@
-define(['app'], function(App) {
+define(['app', 'marionette'], function(App, Marionette) {
 
-  describe('App object', function () {
 
-    describe('obj', function () {
-      it('should equial 123', function () {
-        var app = new App();
+    describe('app', function () {
+	      it('should be type of Marionette.Application', function () {
+	        //var app = new App();
 
-        console.log("app.test return: " + app.test);
+	        console.log(App);
+	        //console.log("app.test return: " + app.test());
 
-        expect(app.test).toEqual("123");
+	        expect(App instanceof Marionette.Application).toBeTruthy();
       });
     });
 
-  });
+    describe('app test', function () {
+	      it('should be eq 123', function () {
+
+	        expect(App.test()).toEqual("123");
+      });
+    });
+
 });

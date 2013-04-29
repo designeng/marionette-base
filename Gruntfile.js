@@ -14,10 +14,15 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
+          //look at https://github.com/jfparadis/requirejs-handlebars/blob/master/build.js
           appDir: "app",
-          baseUrl: "js",
-          dir: "public",
-          mainConfigFile: "app/js/main.js",
+          baseUrl: "scripts",
+          mainConfigFile: "app/scripts/main.js",
+          dir: "app-build",          
+          inlineText: true,
+          stubModules: ['text', 'hbars'],
+          removeCombined: true,
+          preserveLicenseComments: false,
           modules: [
               {
                   name: "main.build",
@@ -31,7 +36,7 @@ module.exports = function(grunt) {
 
     jasmine : {
       //src : 'app/**/*.js',
-      src: 'app/js/collections/todocollection.js',
+      src: 'app/scripts/collections/todocollection.js',
       options : {
         specs : 'test/**/*.js',
         template : require('grunt-template-jasmine-istanbul'),
@@ -94,7 +99,7 @@ module.exports = function(grunt) {
 
     regarde: {    
       js: {
-        files: ['test/spec/**/*.js', 'app/js/**/*.js', 'test/SpecRunner.js', '!node_modules/**/*.js', '!app/components/**/*.js'],
+        files: ['test/spec/**/*.js', 'app/scripts/**/*.js', 'app/templates/**/*.html', 'test/SpecRunner.js', '!node_modules/**/*.js'],
         tasks: ['livereload']
       },
       css: {

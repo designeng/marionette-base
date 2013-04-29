@@ -1,8 +1,9 @@
 define(function() {
   return {
     specs: [
-      //'models/todo_spec.js',
-      'spec/collections/col_spec.js'
+      'spec/models/todo_spec.js',
+      'spec/collections/col_spec.js',
+      'spec/app/app.js',
     ]
   };
 });
